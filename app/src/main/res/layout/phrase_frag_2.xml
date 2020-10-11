@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:id="@+id/sen_frag"
+    android:layout_marginTop="100dp"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:id="@+id/textlayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="23dp"
+        android:layout_marginRight="23dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:background="@drawable/card_background">
+
+
+
+
+        <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+            android:id="@+id/text_field_boxes3"
+            android:layout_width="230dp"
+            android:layout_gravity="left|center"
+            android:layout_height="50dp"
+            android:hint="Example Sentences"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textSize="15dp"
+            android:layout_marginLeft="5dp"
+            android:text=""
+            app:prefix="S " />
+
+        <ImageButton
+            android:id="@+id/dark2_button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="5dp"
+            android:src="@drawable/ic_add"
+            android:background="@drawable/btn_style"
+            />
+
+    </LinearLayout>
+
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+
+        android:divider="@null"
+
+        android:background="@drawable/card_background"
+
+        android:scrollbarStyle="outsideOverlay"
+        android:fastScrollEnabled="true"
+        android:dividerHeight="10dp"
+        >
+
+
+
+    </ListView>
+
+
+</LinearLayout>

@@ -1,0 +1,159 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.Bridge">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:statusBarColor">@color/colorPrimary</item>
+        <item name="searchViewStyle">@style/CitySearchView</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:scrollbarThumbVertical">@drawable/back_scrollbar</item>
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+
+    </style>
+    <style name="my_dialog_theme" parent="ThemeOverlay.AppCompat.Dialog">
+        <item name="showTitle">false</item>
+        <item name="android:headerBackground">@color/colorPrimary</item>                   <!--header background-->
+        <item name="android:background">@color/bbb</item>     <!--calendar background-->
+        <item name="android:numbersTextColor">@color/soft_light</item> <!--selected day-->
+        <item name="android:numbersBackgroundColor">@color/white</item> <!--days of the month-->
+        <item name="android:numbersSelectorColor">@color/white</item>    <!--days of the week-->
+    </style>
+
+    <style name="AppThemeDarkActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">#000</item>
+        <item name="colorPrimaryDark">#000</item>
+        <item name="colorAccent">#000</item>
+        <item name="android:statusBarColor">#000</item>
+        <item name="searchViewStyle">@style/CitySearchView</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:scrollbarThumbVertical">@drawable/back_scrollbar</item>
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:scrollbarThumbVertical">@drawable/back_scrollbar</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+
+
+    </style>
+
+
+    <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="color">@android:color/white</item>
+    </style>
+
+    <style name="TextAppearance44">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="TextAppearance45">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+
+    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_background</item>
+    </style>
+
+    <style name="TabButtonTextStyle" parent="android:Widget.Button">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@drawable/tab_button_text_selector</item>
+    </style>
+
+    <style name="AutoCompleteTextViewStyle" parent="Widget.AppCompat.Light.AutoCompleteTextView">
+        <item name="android:popupBackground">@drawable/search_suggestions_bg</item>
+        <item name="android:popupElevation" tools:targetApi="lollipop">0dp</item>
+    </style>
+
+    <style name="SearchViewTheme" parent="Widget.AppCompat.SearchView.ActionBar">
+        <item name="layout">@layout/toolbar_search_view</item>
+        <item name="commitIcon">@drawable/ic_search_commit</item>
+        <item name="colorControlNormal">@color/material_light_active_icon</item>
+        <item name="colorControlHighlight">@color/material_ripple_light</item>
+        <item name="autoCompleteTextViewStyle">@style/AutoCompleteTextViewStyle</item>
+        <item name="suggestionRowLayout">@layout/search_view_suggestion_row</item>
+        <item name="android:maxWidth">9999dp</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="CitySearchView" parent="Base.Widget.AppCompat.SearchView">
+        <item name="searchIcon">@drawable/ic_searchw</item>
+        <item name="android:editTextColor">@color/white</item>
+        <item name="closeIcon">@drawable/ic_close_black_24dp</item>
+        <item name="searchHintIcon">@null</item>
+
+    </style>
+    <style name="DialogurDark" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">#3a9ebe</item>
+        <item name="android:textColorPrimary">@android:color/background_light</item>
+        <item name="android:textColor">@android:color/background_light</item>
+        <item name="textColorAlertDialogListItem">@android:color/background_light</item>
+        <item name="android:background">@android:color/black</item>
+    </style>
+
+    <style name="DialogueLight" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">#3a9ebe</item>
+        <item name="android:textColorPrimary">@android:color/black</item>
+        <item name="textColorAlertDialogListItem">@android:color/black</item>
+        <item name="android:textColor">@android:color/background_dark</item>
+        <item name="android:background">@android:color/background_light</item>
+    </style>
+
+    <style name="DialogurDark1" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">#3a9ebe</item>
+        <item name="android:textColorPrimary">@android:color/background_light</item>
+        <item name="android:background">@android:color/black</item>
+    </style>
+
+    <style name="DialogueLight1" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">#3a9ebe</item>
+        <item name="android:textColorPrimary">@android:color/black</item>
+        <item name="android:background">@android:color/background_light</item>
+    </style>
+    <style name="LoginTextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxStrokeColor">#3a9dbe</item>
+        <item name="boxStrokeWidth">2dp</item>
+    </style>
+
+    <style name="YOURSTYLE" parent="Widget.AppCompat.PopupMenu">
+        <item name="android:textColor">@color/cardview_light_background</item>
+        <item name="android:navigationBarColor" tools:targetApi="lollipop">@android:color/background_dark</item>
+        <item name="android:colorBackground">@android:color/background_dark</item>
+        <item name="android:itemBackground">@android:color/background_dark</item>
+        <item name="android:listDivider">@android:color/background_dark</item>
+    </style>
+
+    <style name="Name" parent="Widget.AppCompat.ListView.Menu">
+        <item name="android:textColor">@color/cardview_light_background</item>
+        <item name="android:navigationBarColor" tools:targetApi="lollipop">@android:color/background_dark</item>
+        <item name="android:colorBackground">@android:color/background_dark</item>
+        <item name="android:itemBackground">@android:color/background_dark</item>
+        <item name="android:listDivider">@android:color/background_dark</item>
+    </style>
+
+    <style name="YOURSTYLE1" parent="Widget.AppCompat.PopupMenu">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:navigationBarColor" tools:targetApi="lollipop">@android:color/background_light</item>
+        <item name="android:itemBackground">@android:color/background_light</item>
+        <item name="android:popupBackground">@android:color/background_light</item>
+        <item name="android:listDivider">@android:color/background_light</item>
+    </style>
+
+</resources>

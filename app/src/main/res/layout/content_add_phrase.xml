@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_music"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".Phrase.Add_phrase"
+    tools:showIn="@layout/activity_add_phrase">
+
+    <RelativeLayout
+        android:id="@+id/wordsec"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/appbarlayout"
+        android:layout_marginTop="10dp">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/word"
+            style="@style/LoginTextInputLayoutStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:inputType="textMultiLine"
+            android:overScrollMode="always"
+            android:scrollbarStyle="insideInset"
+            android:scrollbars = "vertical">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/word1"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginTop="20dp"
+                android:gravity="top|left"
+                android:hint="Phrase"
+                android:inputType="textMultiLine"
+                android:overScrollMode="always"
+                android:paddingLeft="15dp"
+                android:paddingTop="15dp"
+                android:paddingRight="15dp"
+                android:scrollbarStyle="insideInset"
+                android:scrollbars = "vertical"
+                android:textColor="@android:color/background_dark"
+                android:textColorHint="@color/cardview_shadow_start_color"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/meaningB"
+            style="@style/LoginTextInputLayoutStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/word"
+            android:layout_margin="10dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:inputType="textMultiLine"
+            android:overScrollMode="always"
+            android:scrollbarStyle="insideInset"
+            android:scrollbars = "vertical">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/meaningB1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="100dp"
+                android:layout_marginTop="20dp"
+                android:gravity="top|left"
+                android:hint="Meaning in Bengali"
+                android:inputType="textMultiLine"
+                android:overScrollMode="always"
+                android:paddingLeft="15dp"
+                android:paddingTop="15dp"
+                android:paddingRight="15dp"
+                android:scrollbarStyle="insideInset"
+                android:scrollbars = "vertical"
+                android:textColor="@android:color/background_dark"
+                android:textColorHint="@color/cardview_shadow_start_color"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/meaningE"
+            style="@style/LoginTextInputLayoutStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/meaningB"
+            android:layout_margin="10dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:inputType="textMultiLine"
+            android:overScrollMode="always"
+            android:scrollbarStyle="insideInset"
+            android:scrollbars = "vertical">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/meaningE1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="100dp"
+                android:layout_marginTop="20dp"
+                android:gravity="top|left"
+                android:hint="Meaning in English"
+                android:inputType="textMultiLine"
+                android:overScrollMode="always"
+                android:paddingLeft="15dp"
+                android:paddingTop="15dp"
+                android:paddingRight="15dp"
+                android:scrollbarStyle="insideInset"
+                android:scrollbars = "vertical"
+                android:textColor="@android:color/background_dark"
+                android:textColorHint="@color/cardview_shadow_start_color"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/origin"
+            style="@style/LoginTextInputLayoutStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/meaningE"
+            android:layout_margin="10dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:inputType="textMultiLine"
+            android:overScrollMode="always"
+            android:scrollbarStyle="insideInset"
+            android:scrollbars = "vertical">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/origin1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="100dp"
+                android:layout_marginTop="20dp"
+                android:gravity="top|left"
+                android:hint="Origin of that phrase."
+                android:inputType="textMultiLine"
+                android:overScrollMode="always"
+                android:paddingLeft="15dp"
+                android:paddingTop="15dp"
+                android:paddingRight="15dp"
+                android:scrollbarStyle="insideInset"
+                android:scrollbars = "vertical"
+                android:textColor="@android:color/background_dark"
+                android:textColorHint="@color/cardview_shadow_start_color"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/wordsec"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal">
+
+
+        <Button
+            android:id="@+id/done"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/btn_style"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="10dp"
+            android:text="Done"
+            android:textColor="@color/cardview_light_background"/>
+        <Button
+            android:id="@+id/loadonline"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="left"
+            android:layout_marginLeft="160dp"
+            android:layout_marginEnd="13dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/btn_style"
+            android:paddingLeft="5dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:text="Load Online"
+            android:textColor="@color/cardview_light_background"/>
+
+
+
+
+    </RelativeLayout>
+</RelativeLayout>

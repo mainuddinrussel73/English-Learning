@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/coordinate"
+    tools:showIn="@layout/activity_probackup"
+    tools:context=".Backup">
+
+    <RelativeLayout
+        android:id="@+id/coordinate_backup"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        >
+
+
+        <EditText
+            android:id="@+id/retext"
+            android:layout_width="300dp"
+            android:layout_height="100dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="26dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="126dp"
+            android:padding="20dp"
+            android:background="@drawable/background_card"
+            android:hint="File">
+
+
+        </EditText>
+
+        <Button
+            android:id="@+id/click"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/retext"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="53dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp"
+            android:text="Ok"
+            android:textColor="@color/cardview_light_background"
+            android:background="@drawable/buttonshaperound"
+            android:textSize="10dp" />
+
+        <Button
+            android:id="@+id/restore"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="110dp"
+            android:layout_marginEnd="37dp"
+            android:layout_marginTop="120dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:paddingTop="10dp"
+            android:text="Restore"
+            android:textColor="@color/cardview_light_background"
+            android:background="@drawable/buttonshaperound"
+            android:textSize="12dp" />
+
+        <Button
+            android:id="@+id/backup"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="111dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="20dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:paddingTop="10dp"
+            android:text="Backup"
+            android:textColor="@color/cardview_light_background"
+            android:background="@drawable/buttonshaperound"
+            android:textSize="12dp" />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

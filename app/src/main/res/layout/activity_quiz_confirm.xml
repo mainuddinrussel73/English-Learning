@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Quiz.Quiz_confirm"
+    android:id="@+id/confirm">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/app_bar_music"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        app:cardCornerRadius="25dp"
+        app:cardElevation="3dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@drawable/btn_style"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </androidx.cardview.widget.CardView>
+
+    <RelativeLayout
+        android:id="@+id/multi"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@+id/app_bar_music"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+
+        android:background="@drawable/card_background">
+
+        <TextView
+            android:id="@+id/option1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="15dp"
+            android:textSize="15sp"
+            android:text="Multiple Choice Questions : ">
+
+        </TextView>
+
+        <RelativeLayout
+            android:id="@+id/spinerlayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="18dp"
+            android:layout_marginLeft="200dp"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="74dp"
+            android:layout_marginTop="50dp"
+            android:layout_toEndOf="@+id/strtquiz"
+            android:layout_weight=".28"
+            android:background="@drawable/spiner_border"
+            android:orientation="horizontal">
+
+
+
+
+            <com.jaredrummler.materialspinner.MaterialSpinner
+                android:id="@+id/questions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:spinnerMode="dropdown" />
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/strtquiz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="50dp"
+            android:padding="5dp"
+            android:text="Start !"
+            android:background="@drawable/btn_style"
+            android:textColor="@android:color/white"
+            android:textSize="30sp">
+
+        </Button>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/match"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@+id/multi"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:background="@drawable/card_background">
+
+        <TextView
+            android:id="@+id/option2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:text="Matching Words And Meanings : "
+            android:textSize="15sp">
+
+        </TextView>
+
+        <Button
+            android:id="@+id/strtquizmatch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="55dp"
+            android:background="@drawable/btn_style"
+            android:padding="5dp"
+            android:text="Start !"
+            android:textColor="@android:color/white"
+            android:textSize="30sp">
+
+        </Button>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/spell"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@+id/match"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:background="@drawable/card_background">
+
+        <TextView
+            android:id="@+id/option3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:text="Spelling Words : "
+            android:textSize="15sp">
+
+        </TextView>
+
+        <Button
+            android:id="@+id/spelling"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:padding="5dp"
+            android:text="Start !"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/btn_style"
+            android:layout_marginTop="55dp"
+            android:layout_marginBottom="55dp"
+            android:textColor="@android:color/white"
+            android:textSize="30sp">
+
+        </Button>
+    </RelativeLayout>
+
+</RelativeLayout>

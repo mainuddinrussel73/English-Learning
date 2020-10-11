@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/coordinate_j"
+    android:theme="@style/AppTheme.NoActionBar"
+    android:background="@color/bbb"
+    tools:context=".Settings.Settings">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/barrrr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        app:cardCornerRadius="25dp"
+        app:cardElevation="3dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@drawable/btn_style"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </androidx.cardview.widget.CardView>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/barrrr"
+        >
+       <TextView
+           android:id="@+id/top"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:gravity="center"
+           android:fontFamily="@font/lilita_regular"
+           android:textSize="20dp"
+           android:textColor="@color/colorAccent"
+           android:text="Main Options">
+
+       </TextView>
+
+        <LinearLayout
+            android:id="@+id/first"
+            android:layout_below="@+id/top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/activity_horizontal_margin"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:background="@drawable/border_topdown"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/one"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                android:textColor="@color/white"
+                android:fontFamily="@font/kalpurush"
+                android:textSize="20dp"
+                android:text="@string/sync_title">
+
+            </TextView>
+            <com.suke.widget.SwitchButton
+                android:id="@+id/isdark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.8">
+
+            </com.suke.widget.SwitchButton>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/sec"
+            android:layout_below="@+id/first"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/activity_horizontal_margin"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:background="@drawable/border_topdown"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/two"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/kalpurush"
+                    android:textSize="20dp"
+                    android:text="@string/attachment_title">
+
+                </TextView>
+
+                <TextView
+                    android:id="@+id/three"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:textColor="@color/soft_light"
+                    android:fontFamily="@font/kalpurush"
+                    android:textSize="15dp"
+                    android:text="@string/attachment_summary_on">
+
+                </TextView>
+            </LinearLayout>
+
+
+            <com.suke.widget.SwitchButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.8">
+
+            </com.suke.widget.SwitchButton>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/thr"
+            android:layout_below="@+id/sec"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/activity_horizontal_margin"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:background="@drawable/border_topdown"
+            android:orientation="horizontal">
+
+
+                <TextView
+                    android:id="@+id/four"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/kalpurush"
+                    android:textSize="20dp"
+                    android:text="Data Backup">
+
+                </TextView>
+
+
+            <Button
+                android:id="@+id/backup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.4"
+                android:background="@drawable/btn_style"
+                android:text="Backup"
+                android:textColor="@color/white">
+
+            </Button>
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

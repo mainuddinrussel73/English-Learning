@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item android:id="@+id/datas" android:title="WORD">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_voca"
+                    android:icon="@mipmap/ic_voca"
+                    android:title="@string/menu_words" />
+                <item
+                    android:id="@+id/nav_phrase"
+                    android:icon="@mipmap/ic_phrase"
+                    android:title="@string/menu_parase" />
+
+                <item
+                    android:id="@+id/nav_parts"
+                    android:icon="@mipmap/ic_parts"
+                    android:title="@string/menu_parts" />
+
+            </group>
+        </menu>
+    </item>
+
+
+
+
+    <item android:id="@+id/datas1" android:title="OTHERS">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_quiz"
+                    android:icon="@mipmap/ic_quiz"
+                    android:title="@string/menu_quiz" />
+
+                <item
+                    android:id="@+id/nav_tools"
+                    android:icon="@mipmap/ic_settings"
+                    android:title="@string/menu_tools" />
+
+                <item
+                    android:id="@+id/subscription"
+                    android:icon="@mipmap/ic_bell"
+                    android:title="@string/subscribe" />
+
+
+            </group>
+
+        </menu>
+    </item>
+
+
+
+
+
+
+</menu>

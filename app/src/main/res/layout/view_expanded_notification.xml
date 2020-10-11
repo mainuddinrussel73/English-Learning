@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="8dp"
+    android:background="@drawable/btn_style">
+
+    <RelativeLayout
+        android:id="@+id/icon_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/big_icon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:paddingBottom="1dp"
+            android:paddingLeft="4dp"
+            android:paddingRight="6dp"
+            android:src="@mipmap/ic_launcher_foreground"/>
+
+        <ImageView
+            android:id="@+id/small_icon"
+            android:layout_width="18.2dp"
+            android:layout_height="18.2dp"
+            android:layout_alignBottom="@id/big_icon"
+            android:layout_alignRight="@id/big_icon"
+            android:src="@drawable/ic_info"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/notification_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="false"
+        android:layout_marginTop="3dp"
+        android:layout_toRightOf="@+id/icon_container"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:paddingLeft="6dp">
+
+        <TextView
+            android:id="@+id/content_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/cardview_light_background"
+            />
+
+        <TextView
+            android:id="@+id/content_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lilita_regular"
+            android:text="Detailed Message!"
+            android:textColor="@color/cardview_light_background"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/notification_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/icon_container"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/notification_img"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_www"/>
+
+        <TextView
+            android:id="@+id/notification_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:fontFamily="@font/belgrano"
+            android:text="@string/menu_words"
+            android:textColor="@color/cardview_light_background"
+            android:maxLines="8" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/notification_info"
+        android:layout_centerInParent="true">
+
+        <Button
+            android:id="@+id/left_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_transparent"
+            android:paddingLeft="4dp"
+            android:paddingTop="4dp"
+            android:textColor="@color/cardview_light_background"
+            android:shadowRadius="@android:integer/config_longAnimTime"
+            android:text="Done"
+
+            />
+
+        />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/timestamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:paddingRight="3.5dp"
+        android:paddingTop="8dp"
+        android:textColor="@color/cardview_light_background"
+        />
+
+</RelativeLayout>
