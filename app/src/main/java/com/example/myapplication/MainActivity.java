@@ -353,7 +353,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 c.add(randomInt2);
             }
         }
-        if(!contactList.isEmpty())
+        if(contactList.size()>4)
         {
             t1.setText(contactList.get(c.get(0)).getWORD());
             t2.setText(contactList.get(c.get(1)).getWORD());
@@ -506,7 +506,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         }
 
-        if(!contactList1.isEmpty())
+        if(contactList1.size()>1)
         {
             p1.setText(contactList1.get(c1.get(0)).getPHRASE());
 

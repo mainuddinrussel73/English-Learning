@@ -17,7 +17,6 @@
     </style>
     <style name="my_dialog_theme" parent="ThemeOverlay.AppCompat.Dialog">
         <item name="showTitle">false</item>
-        <item name="android:headerBackground">@color/colorPrimary</item>                   <!--header background-->
         <item name="android:background">@color/bbb</item>     <!--calendar background-->
         <item name="android:numbersTextColor">@color/soft_light</item> <!--selected day-->
         <item name="android:numbersBackgroundColor">@color/white</item> <!--days of the month-->

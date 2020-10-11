@@ -100,6 +100,30 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         long result1 = db1.insert(TABLE_NAME2, null, contentValues1);
         return result1!=-1;
     }
+    public boolean exists(String old_word) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db1 = this.getReadableDatabase();
+        String id = null;
+        try {
+            Cursor re = db1.rawQuery("SELECT * FROM Sentence_table WHERE WORD1 = ?; ", new String[]{old_word});
+            if (re.moveToFirst()) {
+                do {
+                    id = re.getString(0);
+                    System.out.println(re.getString(1));
+                } while (re.moveToNext());
+            }
+
+            re.close();
+            // System.out.println(re.getString(0));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        if(id==null){
+            return true;
+        }else return false;
+
+
+    }
     public Cursor getAllData() {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("select * from " + TABLE_NAME, null);

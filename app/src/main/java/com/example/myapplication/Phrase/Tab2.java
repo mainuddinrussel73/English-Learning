@@ -65,7 +65,7 @@ public class Tab2 extends Fragment {
 
         current_word = intent.getStringExtra("message");
 
-        final Cursor cursor = mDBHelper.getAllData1(current_word);
+        final Cursor cursor = mDBHelper.getAllData0(current_word);
 
         // looping through all rows and adding to list
         if (cursor.getCount() != 0) {

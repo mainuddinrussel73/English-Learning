@@ -6,6 +6,9 @@ import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +30,14 @@ import com.example.myapplication.Vocabylary.DataBase.DatabaseHelper;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import es.dmoral.toasty.Toasty;
 
 import static com.example.myapplication.MainActivity.kAlertDialog;
@@ -44,7 +55,11 @@ public class TabFragment1 extends Fragment {
     TextInputEditText antonym;
     TextInputLayout ant;
 
-    Button update,delete,loadonline;
+    Button update,delete,load;
+    String meaningbs="",meaninges="",syns="",ants="";
+    List<String> lines = new ArrayList<>();
+
+    boolean loadonline = false;
 
     ImageButton done;
     String current_word;
@@ -69,7 +84,7 @@ public class TabFragment1 extends Fragment {
 
         update = getActivity().findViewById(R.id.update);
         delete = getActivity().findViewById(R.id.delete);
-        loadonline = getActivity().findViewById(R.id.loadonline);
+        load = getActivity().findViewById(R.id.loadonline);
 
         mDBHelper = new DatabaseHelper(getContext());
 
@@ -225,17 +240,48 @@ public class TabFragment1 extends Fragment {
                 } else if (i == 2) {
                     //Double click
                     i = 0;
-                    String words = word.getText().toString();
-                    int id = intent.getExtras().getInt("id");
-                    id++;
-                    boolean b = mDBHelper.updateData(String.valueOf(id), intent.getStringExtra("message"), words, meaningb.getText().toString(), meaninge.getText().toString(),synonym.getText().toString(),antonym.getText().toString());
-                    if (b == true) {
-                        Toasty.success(getContext(), "Done.", Toast.LENGTH_SHORT).show();
-                        Intent myIntent = new Intent(v.getContext(), MainActivity.class);
-                        myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivityForResult(myIntent, 0);
-                    } else {
-                        Toasty.error(getContext(), "Opps.", Toast.LENGTH_SHORT).show();
+                    if(!loadonline){
+                        System.out.println("loadoff");
+
+                        String words = word.getText().toString();
+                        int id = intent.getExtras().getInt("id");
+                        id++;
+                        boolean b = mDBHelper.updateData(String.valueOf(id), intent.getStringExtra("message"), words, meaningb.getText().toString(),
+                                meaninge.getText().toString(),synonym.getText().toString(),antonym.getText().toString());
+                            if (b == true) {
+                                Toasty.success(getContext(), "Done.", Toast.LENGTH_SHORT).show();
+                                Intent myIntent = new Intent(v.getContext(), MainActivity.class);
+                                myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivityForResult(myIntent, 0);
+                            } else {
+                                Toasty.error(getContext(), "opps.", Toast.LENGTH_SHORT).show();
+                            }
+
+                    }else{
+                        System.out.println("loadon");
+                        loadonline = false;
+                        System.out.println(lines);
+                        if(mDBHelper.exists(word.getText().toString())) {
+                            System.out.println("not exists");
+                            for (String s :
+                                    lines) {
+                                mDBHelper.insertData1(word.getText().toString(), s);
+
+                            }
+                        }
+                        String words = word.getText().toString();
+                        int id = intent.getExtras().getInt("id");
+                        id++;
+                        boolean b = mDBHelper.updateData(String.valueOf(id), intent.getStringExtra("message"), words, meaningb.getText().toString(),
+                                meaninge.getText().toString(),synonym.getText().toString(),antonym.getText().toString());
+                        if (b == true) {
+                            Toasty.success(getContext(), "Done.", Toast.LENGTH_SHORT).show();
+                            Intent myIntent = new Intent(getContext(), MainActivity.class);
+                            myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivityForResult(myIntent, 0);
+                        } else {
+                            Toasty.error(getContext(), "opps.", Toast.LENGTH_SHORT).show();
+                        }
                     }
                     word.setEnabled(false);
                     meaningb.setEnabled(false);
@@ -351,7 +397,107 @@ public class TabFragment1 extends Fragment {
             }
         });
 
+        load.setOnClickListener(new View.OnClickListener() {
 
+            int i = 0;
+
+            @Override
+            public void onClick(View v) {
+                ConnectivityManager conMgr =  (ConnectivityManager)getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo netInfo = conMgr.getActiveNetworkInfo();
+
+                if (word.getText().toString().isEmpty() || word.getText().toString().trim().length() <= 0) {
+                    Toasty.error(getContext(), "No input.", Toast.LENGTH_SHORT).show();
+                }else {
+
+                    if (netInfo != null) {
+                        if (netInfo.isConnected()) {
+                            new RetrieveFeedTask().execute("http://dictionary.studysite.org/Bengali-meaning-of-".concat(word.getText().toString().trim()));
+                        }
+                    }else{
+                        Toasty.error(getContext(),"No internet connection.", Toast.LENGTH_LONG).show();
+                    }
+
+
+                }
+
+
+            }
+        });
+
+
+    }
+    class RetrieveFeedTask extends AsyncTask<String, Void, Void> {
+
+        private Exception exception;
+
+
+        protected Void doInBackground(String... urls) {
+            try {
+                String url = (urls[0]);
+
+
+                Document doc =  Jsoup.connect(url).get();
+                Element table = doc.select("table").get(0); //select the first table.
+                Elements rows = table.select("tr");
+                System.out.println(rows.size());
+                if(rows.size()==8){
+                    meaningbs = rows.get(1).select("td").get(1).wholeText();
+                    meaninges =  rows.get(2).select("td").get(1).wholeText();
+                    System.out.println("Pics : " + rows.get(3).select("td").get(0).select("img").first().attr("abs:src"));
+                    rows.get(4).select("td").select("br").after("\n");
+                    String[] temp = new String[1000];
+                    temp = rows.get(4).select("td").get(1).wholeText().split("\\r?\\n");
+                    for (int i = 0; i < rows.get(4).select("td").get(1).wholeText().split("\\r?\\n").length; i++) {
+                        lines.add(temp[i]);
+                    }
+                    syns = rows.get(5).select("td").get(1).wholeText();
+                    ants = rows.get(6).select("td").get(1).wholeText();
+                }else if(rows.size()==7){
+                    meaningbs = rows.get(1).select("td").get(1).wholeText();
+                    meaninges =  rows.get(2).select("td").get(1).wholeText();
+                    rows.get(3).select("td").select("br").after("\n");
+                    String[] temp = new String[1000];
+                    temp = rows.get(3).select("td").get(1).wholeText().split("\\r?\\n");
+                    for (int i = 0; i < rows.get(3).select("td").get(1).wholeText().split("\\r?\\n").length; i++) {
+                        lines.add(temp[i]);
+                    }
+                    syns = rows.get(4).select("td").get(1).wholeText();
+                    ants = rows.get(5).select("td").get(1).wholeText();
+                }
+            } catch (Exception e) {
+                this.exception = e;
+                System.out.println(e.getMessage());
+
+                return null;
+            }
+            return null;
+        }
+
+        protected void onPostExecute(Void doc) {
+
+            // In cas
+            // e of any IO errors, we want the messages written to the console
+
+            loadonline = true;
+            if(meaningb.getText().toString().trim().equals("None")){
+                meaningb.setText(meaningbs);
+            }
+            if(meaninge.getText().toString().trim().equals("None")){
+                meaninge.setText(meaninges);
+            }
+            if(synonym.getText().toString().trim().equals("None")){
+                synonym.setText(syns);
+            }
+            if(antonym.getText().toString().trim().equals("None")){
+                antonym.setText(ants);
+            }
+
+
+            Toasty.success(getContext(),"Done.",Toast.LENGTH_LONG).show();
+            // TODO: check this.exception
+            // TODO: do something with the feed
+        }
     }
 
     @Override

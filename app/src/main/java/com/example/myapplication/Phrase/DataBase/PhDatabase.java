@@ -96,13 +96,42 @@ public class PhDatabase extends SQLiteOpenHelper {
         long result1 = db1.insert(TABLE_NAME2, null, contentValues1);
         return result1!=-1;
     }
+    public boolean exists(String old_word) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db1 = this.getReadableDatabase();
+        String id = null;
+        try {
+            Cursor re = db1.rawQuery("SELECT * FROM Sentence_table WHERE PHRASE1 = ?; ", new String[]{old_word});
+            if (re.moveToFirst()) {
+                do {
+                    System.out.println(re.getString(0));
+                    id = re.getString(0);
+                } while (re.moveToNext());
+            }
+
+            re.close();
+            // System.out.println(re.getString(0));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        if(id==null){
+            return true;
+        }else return false;
+
+
+    }
     public Cursor getAllData() {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("select * from " + TABLE_NAME, null);
         return res;
     }
+    public Cursor getAllData1() {
+        SQLiteDatabase db1 = this.getWritableDatabase();
+        Cursor res = db1.rawQuery("select * from " + TABLE_NAME2, null);
+        return res;
+    }
 
-    public Cursor getAllData1(String old_word) {
+    public Cursor getAllData0(String old_word) {
         SQLiteDatabase db1 = this.getWritableDatabase();
         Cursor res = db1.rawQuery("SELECT * FROM Sentence_table WHERE PHRASE1 = ?; ", new String[]{old_word});
         return res;
@@ -145,7 +174,7 @@ public class PhDatabase extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         SQLiteDatabase db1 = this.getReadableDatabase();
         try {
-            Cursor re = db1.rawQuery("SELECT * FROM Phrase_table WHERE WORD = ?; ", new String[]{old_phrase});
+            Cursor re = db1.rawQuery("SELECT * FROM Phrase_table WHERE PHRASE = ?; ", new String[]{old_phrase});
             if (re.moveToFirst()) {
                 do {
                     System.out.println(re.getString(0));
@@ -196,7 +225,7 @@ public class PhDatabase extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         SQLiteDatabase db1 = this.getReadableDatabase();
         try {
-            Cursor re = db1.rawQuery("SELECT * FROM Sentence_table WHERE WORD1 = ?; ", new String[]{old_phrase});
+            Cursor re = db1.rawQuery("SELECT * FROM Sentence_table WHERE PHRASE1 = ?; ", new String[]{old_phrase});
             if (re.moveToFirst()) {
                 do {
                     System.out.println(re.getString(0));

@@ -269,6 +269,55 @@ public class Backup extends AppCompatActivity {
                     // showMessage("Error", "Nothing found");
                 }
 
+
+                JSONArray jsonArray3 = new JSONArray();
+                final Cursor cursor3 = PhDatabase.getAllData1();
+
+                // looping through all rows and adding to list
+                if (cursor3.getCount() != 0) {
+                    // show message
+                    while (cursor3.moveToNext()) {
+
+                        JSONObject word = new JSONObject();
+                        try {
+                            word.put("ID", Integer.parseInt(cursor3.getString(0)));
+                            word.put("PHRASE", cursor3.getString(1));
+                            word.put("SENTENCE", cursor3.getString(2));
+                            System.out.println(word);
+                        } catch (JSONException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
+                        jsonArray3.put(word);
+                    }
+
+                    File root = android.os.Environment.getExternalStorageDirectory();
+                    // http://stackoverflow.com/questions/3551821/android-write-to-sd-card-folder
+                    File dir = new File(root.getAbsolutePath() + "/wordstore");
+                    dir.mkdirs();
+                    File file = new File(dir, "backup_sentences_phrase.json");
+                    try {
+                        FileOutputStream f = new FileOutputStream(file);
+                        PrintWriter pw = new PrintWriter(f);
+                        pw.write(jsonArray3.toString());
+                        pw.flush();
+                        pw.close();
+                        f.close();
+                        Toasty.success(getApplicationContext(), "Done.", Toast.LENGTH_SHORT).show();
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                        Toasty.error(getApplicationContext(), "Opps.", Toast.LENGTH_SHORT).show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        Toasty.error(getApplicationContext(), "Opps.", Toast.LENGTH_SHORT).show();
+                    }
+
+                } else {
+
+                    Toasty.error(getApplicationContext(), "Opps, Nothing found.", Toast.LENGTH_SHORT).show();
+                }
+
+
                 JSONArray jsonArray2 = new JSONArray();
                 final Cursor cursor2 = partsDb.getAllData();
 
@@ -559,7 +608,7 @@ public class Backup extends AppCompatActivity {
             }
             try {
                 jsonArray = new JSONArray(json);
-                PhDatabase.deleteAll1();
+                PhDatabase.deleteAll();
                 for (int i = 0; i < jsonArray.length(); i++) {
                     jsonObject = new JSONObject(jsonArray.get(i).toString());
 
@@ -580,6 +629,68 @@ public class Backup extends AppCompatActivity {
             }
         }
     }
+
+    private int dothings0() {
+        String[] parts = fileUri.getLastPathSegment().split(":");
+        String part2 = parts[1]; // 0
+
+
+        {
+            String retreivedDBPAth = Environment.getExternalStorageDirectory() + "/" +part2.replace("backup","backup_sentences_phrase");
+            File retrievedDB = new File(retreivedDBPAth);
+            InputStream is = null;
+
+
+            try {
+                is = new FileInputStream(retrievedDB);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+
+                //Toast.makeText(getApplicationContext(),"Opps.",Toast.LENGTH_SHORT).show();
+                return 0;
+            }
+            InputStreamReader isr = new InputStreamReader(is);
+
+            JSONArray jsonArray = new JSONArray();
+            JSONObject jsonObject = new JSONObject();
+            StringBuilder stringBuilder = new StringBuilder();
+            JSONObject reader = new JSONObject();
+            String json = null;
+            try {
+                //is = getActivity().getAssets().open("yourfilename.json");
+                int size = is.available();
+                byte[] buffer = new byte[size];
+                is.read(buffer);
+                is.close();
+                json = new String(buffer, StandardCharsets.UTF_8);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+                //Toast.makeText(getApplicationContext(),"Opps.",Toast.LENGTH_SHORT).show();
+                return 0;
+            }
+            try {
+                jsonArray = new JSONArray(json);
+                PhDatabase.deleteAll1();
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    jsonObject = new JSONObject(jsonArray.get(i).toString());
+
+                    if(jsonObject.has("SENTENCE") && !jsonObject.get("SENTENCE").toString().trim().equals("")){
+                        System.out.println(jsonObject.toString());
+                        PhDatabase.insertData1(jsonObject.get("PHRASE").toString(), jsonObject.get("SENTENCE").toString());
+                    }
+                }
+                // Toast.makeText(getApplicationContext(),"Done.",Toast.LENGTH_SHORT).show();
+                return 1;
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+                //Toast.makeText(getApplicationContext(),"Opps.",Toast.LENGTH_SHORT).show();
+                return 0;
+            }
+        }
+    }
+
 
     private int dothings3() {
         String[] parts = fileUri.getLastPathSegment().split(":");
@@ -652,6 +763,7 @@ public class Backup extends AppCompatActivity {
                dothings();
                dothings1();
                dothings2();
+               dothings0();
                dothings3();
                return true;
            }catch (Exception e){

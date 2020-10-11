@@ -6,6 +6,9 @@ import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,8 +27,16 @@ import com.example.myapplication.MainActivity;
 import com.example.myapplication.Phrase.Data.phrase;
 import com.example.myapplication.Phrase.DataBase.PhDatabase;
 import com.example.myapplication.R;
+import com.example.myapplication.Vocabylary.TabFragment1;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import es.dmoral.toasty.Toasty;
 
@@ -43,10 +54,14 @@ public class Tab1 extends Fragment {
     TextInputLayout or;
 
 
-    Button update,delete,loadonline;
+    Button update,delete,load;
 
     ImageButton done;
     String current_word;
+    String meaningbs="",meaninges="",origins="";
+    List<String> lines = new ArrayList<>();
+
+    boolean loadonline = false;
     private PhDatabase mDBHelper;
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -67,7 +82,7 @@ public class Tab1 extends Fragment {
 
         update = getActivity().findViewById(R.id.update);
         delete = getActivity().findViewById(R.id.delete);
-        loadonline = getActivity().findViewById(R.id.loadonline);
+        load = getActivity().findViewById(R.id.loadonline);
 
 
         mDBHelper = new PhDatabase(getContext());
@@ -206,18 +221,46 @@ public class Tab1 extends Fragment {
                 } else if (i == 2) {
                     //Double click
                     i = 0;
-                    String words = word.getText().toString();
-                    int id = intent.getExtras().getInt("id");
-                    id++;
-                    boolean b = mDBHelper.updateData(String.valueOf(id), intent.getStringExtra("message"), words, meaningb.getText().toString(), meaninge.getText().toString(),origin.getText().toString());
-                    if (b == true) {
-                        Toasty.success(getContext(), "Done.", Toast.LENGTH_SHORT).show();
-                        Intent myIntent = new Intent(v.getContext(), MainActivity.class);
-                        myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivityForResult(myIntent, 0);
-                    } else {
-                        Toasty.error(getContext(), "Opps.", Toast.LENGTH_SHORT).show();
+
+                    if(!loadonline){
+
+                        String words = word.getText().toString();
+                        int id = intent.getExtras().getInt("id");
+                        id++;
+                        boolean b = mDBHelper.updateData(String.valueOf(id), intent.getStringExtra("message"), words, meaningb.getText().toString(), meaninge.getText().toString(),origin.getText().toString());
+                        if (b == true) {
+                            Toasty.success(getContext(), "Done.", Toast.LENGTH_SHORT).show();
+                            Intent myIntent = new Intent(v.getContext(), MainActivity.class);
+                            myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivityForResult(myIntent, 0);
+                        } else {
+                            Toasty.error(getContext(), "Opps.", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }else{
+                        loadonline = false;
+                        if(mDBHelper.exists(word.getText().toString())) {
+                            for (String s :
+                                    lines) {
+                                mDBHelper.insertData1(word.getText().toString(), s);
+                            }
+                        }
+                        String words = word.getText().toString();
+                        int id = intent.getExtras().getInt("id");
+                        id++;
+                        boolean b = mDBHelper.updateData(String.valueOf(id), intent.getStringExtra("message"), words, meaningb.getText().toString(), meaninge.getText().toString(),origin.getText().toString());
+                        if (b == true) {
+                            Toasty.success(getContext(), "Done.", Toast.LENGTH_SHORT).show();
+                            Intent myIntent = new Intent(v.getContext(), MainActivity.class);
+                            myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivityForResult(myIntent, 0);
+                        } else {
+                            Toasty.error(getContext(), "Opps.", Toast.LENGTH_SHORT).show();
+                        }
                     }
+
+
+
                     word.setEnabled(false);
                     meaningb.setEnabled(false);
                     meaninge.setEnabled(false);
@@ -332,7 +375,90 @@ public class Tab1 extends Fragment {
             }
         });
 
+        load.setOnClickListener(new View.OnClickListener() {
 
+            int i = 0;
+
+            @Override
+            public void onClick(View v) {
+                ConnectivityManager conMgr =  (ConnectivityManager)getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo netInfo = conMgr.getActiveNetworkInfo();
+
+                if (word.getText().toString().isEmpty() || word.getText().toString().trim().length() <= 0) {
+                    Toasty.error(getContext(), "No input.", Toast.LENGTH_SHORT).show();
+                }else {
+
+                    if (netInfo != null) {
+                        if (netInfo.isConnected()) {
+                            new RetrieveFeedTask().execute("https://www.theidioms.com/".concat(word.getText().toString().trim().replaceAll(" ","-")));
+                        }
+                    }else{
+                        Toasty.error(getContext(),"No internet connection.", Toast.LENGTH_LONG).show();
+                    }
+
+
+                }
+
+
+            }
+        });
+
+
+    }
+
+    class RetrieveFeedTask extends AsyncTask<String, Void, Void> {
+
+        private Exception exception;
+
+
+        protected Void doInBackground(String... urls) {
+            try {
+                String url = (urls[0]);
+
+
+                Document doc =  Jsoup.connect(url).get();
+                Element table = doc.select("div[class=article]").get(0); //select the first table.
+
+                Element rows = table.select("ul").first();
+
+                for (int i = 0; i <rows.select("li").size() ; i++) {
+                    System.out.println(rows.select("li").get(i).wholeText());
+                    meaninges += (rows.select("li").get(i).wholeText());
+
+                }
+                Element rows1 = table.select("ol").first();
+                for (int i = 0; i <rows1.select("li").size() ; i++) {
+                    System.out.println(rows1.select("li").get(i).wholeText());
+                    lines.add(rows1.select("li").get(i).wholeText());
+                }
+
+                Element rows2 = table.select("p").get(1);
+                System.out.println(rows2.wholeText());
+                origins = rows2.wholeText();
+
+
+            } catch (Exception e) {
+                this.exception = e;
+                System.out.println(e.getMessage());
+
+                return null;
+            }
+            return null;
+        }
+
+        protected void onPostExecute(Void doc) {
+
+            // In cas
+            // e of any IO errors, we want the messages written to the console
+
+            loadonline = true;
+            meaningb.setText(meaningbs);
+            meaninge.setText(meaninges);
+            origin.setText(origins);
+            Toasty.success(getContext(),"Done.",Toast.LENGTH_LONG).show();
+            // TODO: check this.exception
+            // TODO: do something with the feed
+        }
     }
 
     @Override
